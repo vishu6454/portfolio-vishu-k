@@ -1,4 +1,4 @@
-// server.js (updated version)
+// server.js - Update the CORS configuration
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -31,22 +31,51 @@ const limiter = rateLimit({
 
 app.use('/api/', limiter);
 
+// UPDATE CORS CONFIGURATION - Allow Vercel frontend
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'https://portfolio-vishu-k.vercel.app',
+  'https://portfolio-vishu-k.vercel.app/',
+  'https://your-vercel-app.vercel.app', // Add your specific Vercel URL
+  /\.vercel\.app$/, // Allow all Vercel subdomains
+  'https://portfolio-vishu-k.onrender.com'
+];
+
 app.use(cors({
-  origin: [
-    'http://localhost:5173', 
-    'https://portfolio-omega-three-74.vercel.app', 
-    'https://portfolio-vishu-k.onrender.com'
-  ],
+  origin: function(origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.some(allowedOrigin => {
+      if (allowedOrigin instanceof RegExp) {
+        return allowedOrigin.test(origin);
+      }
+      return allowedOrigin === origin;
+    })) {
+      callback(null, true);
+    } else {
+      console.log('Blocked origin:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  exposedHeaders: ['Content-Length', 'X-Requested-With'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 }));
+
+// Handle preflight requests explicitly
+app.options('*', cors());
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+  console.log('Origin:', req.headers.origin);
   next();
 });
 
@@ -60,15 +89,14 @@ const connectDB = async () => {
       process.exit(1);
     }
     
-    console.log(`📡 Attempting to connect to MongoDB...`);
+    console.log('📡 Connecting to MongoDB...');
     
-    // Add connection options for better reliability
     await mongoose.connect(mongoURI, {
-      serverSelectionTimeoutMS: 10000, // Increase timeout to 10s for slow cold starts
+      serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
     });
     
-    console.log(`✅ MongoDB connected successfully to: ${mongoose.connection.host}`);
+    console.log('✅ MongoDB connected successfully');
     
     // Test the connection
     const db = mongoose.connection.db;
@@ -77,12 +105,10 @@ const connectDB = async () => {
     
   } catch (error) {
     console.error('❌ MongoDB connection error:', error.message);
-    // Retry connection after 5 seconds
     setTimeout(connectDB, 5000);
   }
 };
 
-// Initial connection
 connectDB();
 
 mongoose.connection.on('connected', () => {
@@ -172,6 +198,7 @@ app.use((err, req, res, next) => {
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`🍃 MongoDB Status: ${mongoose.connection.readyState === 1 ? 'Connected' : 'Not connected'}`);
+  console.log(`✅ CORS enabled for:`, allowedOrigins);
 });
 
 export default app;

@@ -7,7 +7,7 @@ import {
 } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
 import { toast } from "react-hot-toast";
-import axios from "axios";
+import axiosInstance from "../config/axios";
 
 const API_URL = import.meta.env.VITE_API_URL || "https://portfolio-vishu-k.onrender.com/api";
 
@@ -37,13 +37,9 @@ export default function Testimonials() {
     try {
       setLoading(true);
       setError(null);
-      console.log("🚀 [API DEBUG] Fetching testimonials from:", `${API_URL}/testimonials`);
-      console.log("🌐 [API DEBUG] Base API URL:", API_URL);
+      console.log("Fetching testimonials from:", `${API_URL}/testimonials`);
       
-      // Add timeout to the request
-      const response = await axios.get(`${API_URL}/testimonials`, {
-        timeout: 10000 // 10 second timeout
-      });
+      const response = await axiosInstance.get('/testimonials');
       
       console.log("API Response:", response.data);
       
@@ -59,14 +55,13 @@ export default function Testimonials() {
     } catch (error) {
       console.error("Error fetching testimonials:", error);
       
-      // More detailed error handling
-      if (error.code === 'ECONNABORTED') {
+      if (error.code === 'ERR_NETWORK') {
+        setError("CORS error: Cannot connect to backend. Please check server configuration.");
+      } else if (error.code === 'ECONNABORTED') {
         setError("Request timeout. Please check your internet connection.");
       } else if (error.response) {
-        console.error("Response error:", error.response.data);
         setError(error.response.data.message || `Server error: ${error.response.status}`);
       } else if (error.request) {
-        console.error("No response received:", error.request);
         setError("Cannot connect to server. Please check if backend is running.");
       } else {
         setError(error.message || "An error occurred while loading testimonials");
@@ -83,7 +78,7 @@ export default function Testimonials() {
     try {
       const healthUrl = `${API_URL.replace('/api', '')}/api/health`;
       console.log("Checking API health at:", healthUrl);
-      const response = await axios.get(healthUrl, { timeout: 5000 });
+      const response = await axiosInstance.get('/health');
       console.log("API Health:", response.data);
       if (!response.data.mongodbConnected) {
         console.warn("Database is not connected");
@@ -180,13 +175,10 @@ export default function Testimonials() {
 
     try {
       console.log("Submitting testimonial:", formData);
-      const response = await axios.post(`${API_URL}/testimonials`, formData, {
-        timeout: 10000
-      });
+      const response = await axiosInstance.post('/testimonials', formData);
       console.log("Submit response:", response.data);
       
       if (response.data.success) {
-        // Refresh testimonials to show the new one
         await fetchTestimonials();
         closeModal();
         toast.success("Thank you for your feedback!");
