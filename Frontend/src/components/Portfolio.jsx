@@ -306,7 +306,7 @@ export default function Portfolio() {
             initial={{ scale: 0.9, opacity: 0, y: 50 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 50 }}
-            className={`relative max-w-2xl w-full rounded-2xl overflow-hidden shadow-2xl ${
+            className={`relative max-w-sm w-full rounded-2xl overflow-hidden shadow-2xl ${
               isDark ? "bg-slate-800" : "bg-white"
             }`}
             onClick={(e) => e.stopPropagation()}
