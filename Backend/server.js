@@ -32,7 +32,11 @@ const limiter = rateLimit({
 app.use('/api/', limiter);
 
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://your-vercel-app.vercel.app', 'https://portfolio-vishu-k.onrender.com'], // Add your Vercel URL
+  origin: [
+    'http://localhost:5173', 
+    'https://portfolio-omega-three-74.vercel.app', 
+    'https://portfolio-vishu-k.onrender.com'
+  ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
@@ -56,15 +60,15 @@ const connectDB = async () => {
       process.exit(1);
     }
     
-    console.log('📡 Connecting to MongoDB...');
+    console.log(`📡 Attempting to connect to MongoDB...`);
     
     // Add connection options for better reliability
     await mongoose.connect(mongoURI, {
-      serverSelectionTimeoutMS: 5000,
+      serverSelectionTimeoutMS: 10000, // Increase timeout to 10s for slow cold starts
       socketTimeoutMS: 45000,
     });
     
-    console.log('✅ MongoDB connected successfully');
+    console.log(`✅ MongoDB connected successfully to: ${mongoose.connection.host}`);
     
     // Test the connection
     const db = mongoose.connection.db;

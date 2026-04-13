@@ -37,7 +37,8 @@ export default function Testimonials() {
     try {
       setLoading(true);
       setError(null);
-      console.log("Fetching testimonials from:", `${API_URL}/testimonials`);
+      console.log("🚀 [API DEBUG] Fetching testimonials from:", `${API_URL}/testimonials`);
+      console.log("🌐 [API DEBUG] Base API URL:", API_URL);
       
       // Add timeout to the request
       const response = await axios.get(`${API_URL}/testimonials`, {
