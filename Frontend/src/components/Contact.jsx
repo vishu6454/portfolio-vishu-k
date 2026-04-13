@@ -29,7 +29,7 @@ export default function Contact() {
 
   const [errors, setErrors] = useState({});
 
-  const API_URL = import.meta.env.VITE_API_URL || 'https://my-portfolio-gelo.onrender.com/api';
+  const API_URL = import.meta.env.VITE_API_URL || 'https://portfolio-vishu-k.onrender.com/api';
 
   const validateForm = () => {
     const newErrors = {};

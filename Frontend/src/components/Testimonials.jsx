@@ -9,7 +9,7 @@ import { useTheme } from "../context/ThemeContext";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_URL || "https://my-portfolio-gelo.onrender.com/api";
+const API_URL = import.meta.env.VITE_API_URL || "https://portfolio-vishu-k.onrender.com/api";
 
 export default function Testimonials() {
   const ref = useRef(null);
