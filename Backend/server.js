@@ -1,3 +1,4 @@
+// server.js (updated version)
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -31,7 +32,7 @@ const limiter = rateLimit({
 app.use('/api/', limiter);
 
 app.use(cors({
-  origin: '*',
+  origin: ['http://localhost:5173', 'https://your-vercel-app.vercel.app', 'https://portfolio-vishu-k.onrender.com'], // Add your Vercel URL
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
@@ -45,24 +46,39 @@ app.use((req, res, next) => {
   next();
 });
 
-// MongoDB Connection
+// MongoDB Connection with retry logic
 const connectDB = async () => {
   try {
     const mongoURI = process.env.MONGO_URI;
     
     if (!mongoURI) {
       console.error('❌ MONGO_URI is not defined in .env file');
-      return;
+      process.exit(1);
     }
     
     console.log('📡 Connecting to MongoDB...');
-    await mongoose.connect(mongoURI);
+    
+    // Add connection options for better reliability
+    await mongoose.connect(mongoURI, {
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+    });
+    
     console.log('✅ MongoDB connected successfully');
+    
+    // Test the connection
+    const db = mongoose.connection.db;
+    const collections = await db.listCollections().toArray();
+    console.log('📚 Available collections:', collections.map(c => c.name));
+    
   } catch (error) {
     console.error('❌ MongoDB connection error:', error.message);
+    // Retry connection after 5 seconds
+    setTimeout(connectDB, 5000);
   }
 };
 
+// Initial connection
 connectDB();
 
 mongoose.connection.on('connected', () => {
@@ -73,19 +89,48 @@ mongoose.connection.on('error', (err) => {
   console.error('❌ MongoDB connection error:', err.message);
 });
 
+mongoose.connection.on('disconnected', () => {
+  console.log('⚠️ MongoDB disconnected. Attempting to reconnect...');
+  setTimeout(connectDB, 5000);
+});
+
 // Routes
 app.use('/api/contact', contactRoutes);
 app.use('/api/testimonials', testimonialRoutes);
 
-// Health check
+// Health check with detailed info
 app.get('/api/health', (req, res) => {
+  const dbState = mongoose.connection.readyState;
+  const dbStatus = {
+    0: 'disconnected',
+    1: 'connected',
+    2: 'connecting',
+    3: 'disconnecting'
+  };
+  
   res.status(200).json({ 
     success: true,
     status: 'OK', 
     message: 'Server is running',
     timestamp: new Date().toISOString(),
-    mongodbConnected: mongoose.connection.readyState === 1
+    mongodbConnected: dbState === 1,
+    mongodbStatus: dbStatus[dbState] || 'unknown',
+    environment: process.env.NODE_ENV
   });
+});
+
+// Test endpoint to check database
+app.get('/api/test-db', async (req, res) => {
+  try {
+    const count = await mongoose.connection.db.collection('testimonials').countDocuments();
+    res.json({ 
+      success: true, 
+      connected: mongoose.connection.readyState === 1,
+      testimonialCount: count 
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
 });
 
 app.get('/', (req, res) => {
@@ -95,7 +140,8 @@ app.get('/', (req, res) => {
     endpoints: {
       health: '/api/health',
       contact: '/api/contact',
-      testimonials: '/api/testimonials'
+      testimonials: '/api/testimonials',
+      testDb: '/api/test-db'
     }
   });
 });
@@ -108,18 +154,20 @@ app.use((req, res) => {
   });
 });
 
-// Error handling
+// Error handling middleware
 app.use((err, req, res, next) => {
   console.error('Error:', err.message);
+  console.error('Stack:', err.stack);
   res.status(500).json({
     success: false,
-    message: err.message || 'Internal Server Error'
+    message: err.message || 'Internal Server Error',
+    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
   });
 });
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`🍃 MongoDB: ${mongoose.connection.readyState === 1 ? 'Connected' : 'Not connected'}`);
+  console.log(`🍃 MongoDB Status: ${mongoose.connection.readyState === 1 ? 'Connected' : 'Not connected'}`);
 });
 
 export default app;

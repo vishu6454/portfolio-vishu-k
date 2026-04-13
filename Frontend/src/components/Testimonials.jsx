@@ -39,7 +39,11 @@ export default function Testimonials() {
       setError(null);
       console.log("Fetching testimonials from:", `${API_URL}/testimonials`);
       
-      const response = await axios.get(`${API_URL}/testimonials`);
+      // Add timeout to the request
+      const response = await axios.get(`${API_URL}/testimonials`, {
+        timeout: 10000 // 10 second timeout
+      });
+      
       console.log("API Response:", response.data);
       
       if (response.data.success) {
@@ -49,19 +53,49 @@ export default function Testimonials() {
           setCurrentIndex(0);
         }
       } else {
-        setError("Failed to load testimonials");
+        setError(response.data.message || "Failed to load testimonials");
       }
     } catch (error) {
       console.error("Error fetching testimonials:", error);
-      setError(error.message);
+      
+      // More detailed error handling
+      if (error.code === 'ECONNABORTED') {
+        setError("Request timeout. Please check your internet connection.");
+      } else if (error.response) {
+        console.error("Response error:", error.response.data);
+        setError(error.response.data.message || `Server error: ${error.response.status}`);
+      } else if (error.request) {
+        console.error("No response received:", error.request);
+        setError("Cannot connect to server. Please check if backend is running.");
+      } else {
+        setError(error.message || "An error occurred while loading testimonials");
+      }
+      
       setTestimonials([]);
     } finally {
       setLoading(false);
     }
   };
 
+  // Check API health
+  const checkApiHealth = async () => {
+    try {
+      const healthUrl = `${API_URL.replace('/api', '')}/api/health`;
+      console.log("Checking API health at:", healthUrl);
+      const response = await axios.get(healthUrl, { timeout: 5000 });
+      console.log("API Health:", response.data);
+      if (!response.data.mongodbConnected) {
+        console.warn("Database is not connected");
+        setError("Database is connecting. Please refresh in a moment.");
+      }
+    } catch (error) {
+      console.error("Health check failed:", error);
+    }
+  };
+
   useEffect(() => {
     fetchTestimonials();
+    checkApiHealth();
   }, []);
 
   const next = () => {
@@ -145,7 +179,9 @@ export default function Testimonials() {
 
     try {
       console.log("Submitting testimonial:", formData);
-      const response = await axios.post(`${API_URL}/testimonials`, formData);
+      const response = await axios.post(`${API_URL}/testimonials`, formData, {
+        timeout: 10000
+      });
       console.log("Submit response:", response.data);
       
       if (response.data.success) {
@@ -158,7 +194,13 @@ export default function Testimonials() {
       }
     } catch (error) {
       console.error("Error submitting:", error);
-      toast.error(error.response?.data?.message || "Failed to submit");
+      if (error.response) {
+        toast.error(error.response.data.message || "Failed to submit");
+      } else if (error.request) {
+        toast.error("Cannot connect to server. Please try again later.");
+      } else {
+        toast.error(error.message || "Failed to submit");
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -179,13 +221,17 @@ export default function Testimonials() {
     return (
       <section id="testimonials" className={`py-12 sm:py-16 px-4 sm:px-6 lg:px-8 ${isDark ? "bg-slate-900" : "bg-slate-50"}`}>
         <div className="max-w-5xl mx-auto text-center">
-          <p className="text-red-500">Error loading testimonials: {error}</p>
-          <button 
-            onClick={fetchTestimonials}
-            className="mt-4 px-4 py-2 bg-purple-600 text-white rounded-lg"
-          >
-            Retry
-          </button>
+          <div className={`rounded-lg p-6 ${isDark ? "bg-red-900/20" : "bg-red-50"}`}>
+            <p className={`text-lg mb-4 ${isDark ? "text-red-400" : "text-red-600"}`}>
+              Error loading testimonials: {error}
+            </p>
+            <button 
+              onClick={fetchTestimonials}
+              className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+            >
+              Retry
+            </button>
+          </div>
         </div>
       </section>
     );
