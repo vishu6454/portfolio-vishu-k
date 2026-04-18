@@ -75,7 +75,7 @@ export default function Skills() {
           <h2 className={`text-4xl lg:text-5xl font-bold mb-3 tracking-tight ${
             isDark ? "text-slate-100" : "text-slate-800"
           }`}>
-            My <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-blue-500">Skills</span>
+            My <span className="text-transparent bg-clip-text bg-linear-to-r from-violet-500 to-blue-500">Skills</span>
           </h2>
           <p className={`${isDark ? "text-slate-300" : "text-slate-600"} max-w-xl mx-auto`}>
             Tools & technologies I use to build fast, modern and scalable web apps.
