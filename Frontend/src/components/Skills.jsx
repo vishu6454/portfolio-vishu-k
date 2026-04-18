@@ -54,14 +54,14 @@ export default function Skills() {
       ref={ref}
       className={`relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden
         ${isDark
-          ? "bg-linear-to-br from-slate-900 via-purple-900 to-emerald-900"
-          : "bg-linear-to-br from-slate-50 via-purple-50 to-emerald-50"
+          ? "bg-[#0f172a]"
+          : "bg-slate-50"
         }`}
     >
       {/* Glow Background */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-1/4 w-60 h-60 bg-purple-500/30 blur-3xl rounded-full" />
-        <div className="absolute bottom-20 right-1/4 w-72 h-72 bg-emerald-500/30 blur-3xl rounded-full" />
+        <div className="absolute top-20 left-1/4 w-60 h-60 bg-violet-600/20 blur-[100px] rounded-full" />
+        <div className="absolute bottom-20 right-1/4 w-72 h-72 bg-blue-600/20 blur-[100px] rounded-full" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
@@ -72,10 +72,10 @@ export default function Skills() {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h2 className={`text-4xl lg:text-5xl font-bold mb-3 ${
-            isDark ? "text-white" : "text-slate-800"
+          <h2 className={`text-4xl lg:text-5xl font-bold mb-3 tracking-tight ${
+            isDark ? "text-slate-100" : "text-slate-800"
           }`}>
-            My <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-500 to-emerald-500">Skills</span>
+            My <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-blue-500">Skills</span>
           </h2>
           <p className={`${isDark ? "text-slate-300" : "text-slate-600"} max-w-xl mx-auto`}>
             Tools & technologies I use to build fast, modern and scalable web apps.
@@ -92,7 +92,7 @@ export default function Skills() {
               transition={{ delay: i * 0.2 }}
             >
               <h3 className={`text-xl font-semibold mb-6 ${
-                isDark ? "text-emerald-300" : "text-emerald-600"
+                isDark ? "text-violet-400" : "text-violet-600"
               }`}>
                 {group.title}
               </h3>
@@ -133,7 +133,7 @@ export default function Skills() {
                     </div>
 
                     <span className={`absolute top-3 right-3 text-xs font-bold px-2 py-1 rounded-lg
-                      ${isDark ? "bg-black/40 text-emerald-300" : "bg-emerald-100 text-emerald-700"}`}>
+                      ${isDark ? "bg-[#0f172a]/80 text-blue-400 border border-slate-700/50" : "bg-blue-50 text-blue-600 border border-blue-100"}`}>
                       {skill.level}%
                     </span>
 
@@ -170,8 +170,8 @@ export default function Skills() {
                 key={tech}
                 className={`px-3 py-1 rounded-xl text-xs font-medium
                   ${isDark
-                    ? "bg-slate-700 text-emerald-300"
-                    : "bg-emerald-100 text-emerald-700"
+                    ? "bg-[#1e293b] text-blue-400 border border-slate-700"
+                    : "bg-blue-50 text-blue-700 border border-blue-200"
                   }`}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}

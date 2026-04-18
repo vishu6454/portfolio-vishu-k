@@ -140,12 +140,12 @@ export default function Contact() {
       
       <section id="contact" className={`py-12 sm:py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden ${
         isDark 
-          ? "bg-linear-to-br from-slate-900 via-purple-900 to-emerald-900" 
-          : "bg-linear-to-br from-slate-50 via-purple-50 to-emerald-50"
+          ? "bg-[#0f172a]" 
+          : "bg-slate-50"
       }`}>
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-20 left-10 w-40 h-40 bg-purple-500 rounded-full blur-3xl opacity-20" />
-          <div className="absolute bottom-20 right-10 w-56 h-56 bg-emerald-500 rounded-full blur-3xl opacity-20" />
+          <div className="absolute top-20 left-10 w-40 h-40 bg-violet-600 rounded-full blur-[100px] opacity-20" />
+          <div className="absolute bottom-20 right-10 w-56 h-56 bg-blue-600 rounded-full blur-[100px] opacity-20" />
         </div>
 
         <div className="max-w-6xl mx-auto relative z-10">
@@ -156,13 +156,13 @@ export default function Contact() {
             transition={{ duration: 0.8 }}
             className="text-center mb-10"
           >
-            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 ${
-              isDark ? "text-white" : "text-slate-800"
+            <h2 className={`text-4xl lg:text-5xl font-bold mb-3 tracking-tight ${
+              isDark ? "text-slate-100" : "text-slate-800"
             }`}>
-              Get In <span className="text-transparent bg-linear-to-r from-purple-600 to-emerald-600 bg-clip-text">Touch</span>
+              Get In <span className="text-transparent bg-linear-to-r from-violet-500 to-blue-500 bg-clip-text">Touch</span>
             </h2>
             <p className={`text-sm sm:text-base max-w-2xl mx-auto ${
-              isDark ? "text-slate-300" : "text-slate-600"
+              isDark ? "text-slate-400" : "text-slate-600"
             }`}>
               Have a project in mind? I'd love to hear from you. Let's create something amazing together.
             </p>
@@ -187,7 +187,7 @@ export default function Contact() {
                 
                 <div className="space-y-4">
                   <div className="flex items-center gap-4">
-                    <div className="p-3 rounded-xl bg-linear-to-r from-purple-600 to-emerald-600 text-white">
+                    <div className="p-3 rounded-xl bg-linear-to-r from-violet-600 to-blue-600 text-white shadow-sm">
                       <FaEnvelope />
                     </div>
                     <div>
@@ -197,7 +197,7 @@ export default function Contact() {
                   </div>
                   
                   <div className="flex items-center gap-4">
-                    <div className="p-3 rounded-xl bg-linear-to-r from-purple-600 to-emerald-600 text-white">
+                    <div className="p-3 rounded-xl bg-linear-to-r from-violet-600 to-blue-600 text-white shadow-sm">
                       <FaPhone />
                     </div>
                     <div>
@@ -207,7 +207,7 @@ export default function Contact() {
                   </div>
                   
                   <div className="flex items-center gap-4">
-                    <div className="p-3 rounded-xl bg-linear-to-r from-purple-600 to-emerald-600 text-white">
+                    <div className="p-3 rounded-xl bg-linear-to-r from-violet-600 to-blue-600 text-white shadow-sm">
                       <FaMapMarkerAlt />
                     </div>
                     <div>
@@ -217,7 +217,7 @@ export default function Contact() {
                   </div>
                   
                   <div className="flex items-center gap-4">
-                    <div className="p-3 rounded-xl bg-linear-to-r from-purple-600 to-emerald-600 text-white">
+                    <div className="p-3 rounded-xl bg-linear-to-r from-violet-600 to-blue-600 text-white shadow-sm">
                       <FaClock />
                     </div>
                     <div>
@@ -294,8 +294,8 @@ export default function Contact() {
                         errors.user_name
                           ? "border-red-500 focus:ring-red-500"
                           : isDark
-                          ? "bg-slate-900/50 border-slate-600 text-white focus:ring-purple-500"
-                          : "bg-white/50 border-slate-300 text-slate-800 focus:ring-purple-500"
+                          ? "bg-slate-900/50 border-slate-600 text-white focus:ring-blue-500"
+                          : "bg-white/50 border-slate-300 text-slate-800 focus:ring-blue-500"
                       }`}
                     />
                     {errors.user_name && (
@@ -314,8 +314,8 @@ export default function Contact() {
                         errors.user_email
                           ? "border-red-500 focus:ring-red-500"
                           : isDark
-                          ? "bg-slate-900/50 border-slate-600 text-white focus:ring-purple-500"
-                          : "bg-white/50 border-slate-300 text-slate-800 focus:ring-purple-500"
+                          ? "bg-slate-900/50 border-slate-600 text-white focus:ring-blue-500"
+                          : "bg-white/50 border-slate-300 text-slate-800 focus:ring-blue-500"
                       }`}
                     />
                     {errors.user_email && (
@@ -332,8 +332,8 @@ export default function Contact() {
                       placeholder="Subject"
                       className={`w-full px-4 py-3 rounded-xl border transition-all focus:outline-none focus:ring-2 ${
                         isDark
-                          ? "bg-slate-900/50 border-slate-600 text-white focus:ring-purple-500"
-                          : "bg-white/50 border-slate-300 text-slate-800 focus:ring-purple-500"
+                          ? "bg-slate-900/50 border-slate-600 text-white focus:ring-blue-500"
+                          : "bg-white/50 border-slate-300 text-slate-800 focus:ring-blue-500"
                       }`}
                     />
                   </div>
@@ -349,8 +349,8 @@ export default function Contact() {
                         errors.message
                           ? "border-red-500 focus:ring-red-500"
                           : isDark
-                          ? "bg-slate-900/50 border-slate-600 text-white focus:ring-purple-500"
-                          : "bg-white/50 border-slate-300 text-slate-800 focus:ring-purple-500"
+                          ? "bg-slate-900/50 border-slate-600 text-white focus:ring-blue-500"
+                          : "bg-white/50 border-slate-300 text-slate-800 focus:ring-blue-500"
                       }`}
                     />
                     {errors.message && (
@@ -367,8 +367,8 @@ export default function Contact() {
                   <motion.button
                     type="submit"
                     disabled={isSending}
-                    className={`w-full py-3 rounded-xl bg-linear-to-r from-purple-600 to-emerald-600 text-white font-semibold flex items-center justify-center gap-2 transition-all ${
-                      isSending ? "opacity-70 cursor-not-allowed" : "hover:shadow-lg hover:scale-105"
+                    className={`w-full py-4 rounded-xl bg-linear-to-r from-violet-600 to-blue-600 text-white font-semibold flex items-center justify-center gap-2 transition-all shadow-md ${
+                      isSending ? "opacity-70 cursor-not-allowed" : "hover:shadow-lg hover:-translate-y-1"
                     }`}
                     whileHover={{ scale: isSending ? 1 : 1.02 }}
                     whileTap={{ scale: isSending ? 1 : 0.98 }}

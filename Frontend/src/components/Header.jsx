@@ -55,12 +55,12 @@ export default function Header() {
       className={`fixed w-full flex justify-between items-center px-4 sm:px-6 lg:px-8 py-3 z-50 transition-all duration-300 ${
         scrolled 
           ? "bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-lg border-b border-slate-200/50 dark:border-slate-700/50" 
-          : "bg-linear-to-r from-purple-600 to-emerald-600 dark:from-purple-900 dark:to-emerald-900"
+          : "bg-gradient-to-r from-violet-600 to-blue-600 dark:from-slate-900 dark:to-slate-800"
       }`}
     >
       <motion.a 
         href="#home" 
-        className="font-bold text-2xl sm:text-3xl bg-linear-to-r from-emerald-600 to-purple-600 dark:from-emerald-300 dark:to-purple-300 bg-clip-text text-transparent"
+        className="font-bold text-2xl sm:text-3xl bg-gradient-to-r from-violet-500 to-blue-500 bg-clip-text text-transparent"
         whileHover={{ scale: 1.05 }}
         onClick={(e) => { e.preventDefault(); handleNavClick("#home"); }}
       >
@@ -76,10 +76,10 @@ export default function Header() {
             onClick={(e) => { e.preventDefault(); handleNavClick(item.href); }}
             className={`relative text-sm font-medium px-3 py-2 transition-colors ${
               activeSection === item.id
-                ? "text-emerald-600 dark:text-emerald-400"
+                ? "text-blue-600 dark:text-blue-400"
                 : scrolled 
-                  ? "text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400" 
-                  : "text-white hover:text-emerald-300"
+                  ? "text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400" 
+                  : "text-slate-200 hover:text-white"
             }`}
             whileHover={{ y: -2 }}
             initial={{ opacity: 0, y: -20 }}
@@ -91,7 +91,7 @@ export default function Header() {
               <motion.span
                 layoutId="activeSection"
                 className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-6 h-0.5 rounded-full ${
-                  scrolled ? "bg-linear-to-r from-emerald-600 to-purple-600" : "bg-emerald-300"
+                  scrolled ? "bg-gradient-to-r from-violet-500 to-blue-500" : "bg-blue-400"
                 }`}
                 transition={{ type: "spring", stiffness: 380, damping: 30 }}
               />
@@ -150,7 +150,7 @@ export default function Header() {
                 href={item.href}
                 className={`py-3 text-base font-semibold transition-colors border-b border-slate-100 dark:border-slate-800 ${
                   activeSection === item.id
-                    ? "text-emerald-600 dark:text-emerald-400"
+                    ? "text-blue-600 dark:text-blue-400"
                     : "text-slate-700 dark:text-slate-300"
                 }`}
                 onClick={(e) => { e.preventDefault(); handleNavClick(item.href); }}

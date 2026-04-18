@@ -85,15 +85,15 @@ export default function Portfolio() {
     <>
       <section id="portfolio" className={`py-12 sm:py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden ${
         isDark 
-          ? "bg-linear-to-br from-slate-900 via-purple-900 to-emerald-900" 
-          : "bg-linear-to-br from-slate-50 via-purple-50 to-emerald-50"
+          ? "bg-[#0f172a]" 
+          : "bg-slate-50"
       }`}>
         {/* Background Pattern */}
-        <div className={`absolute inset-0 ${
-          isDark ? "opacity-10" : "opacity-5"
+        <div className={`absolute inset-0 pointer-events-none ${
+          isDark ? "opacity-15" : "opacity-5"
         }`}>
-          <div className="absolute top-0 right-0 w-40 h-40 sm:w-64 sm:h-64 bg-purple-500 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-48 h-48 sm:w-96 sm:h-96 bg-emerald-500 rounded-full blur-3xl"></div>
+          <div className="absolute top-0 right-0 w-40 h-40 sm:w-64 sm:h-64 bg-violet-600 rounded-full blur-[100px]"></div>
+          <div className="absolute bottom-0 left-0 w-48 h-48 sm:w-96 sm:h-96 bg-blue-600 rounded-full blur-[100px]"></div>
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10">
@@ -104,13 +104,13 @@ export default function Portfolio() {
             transition={{ duration: 0.8 }}
             className="text-center mb-8 sm:mb-10"
           >
-            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 ${
-              isDark ? "text-white" : "text-slate-800"
+            <h2 className={`text-4xl lg:text-5xl font-bold mb-3 tracking-tight ${
+              isDark ? "text-slate-100" : "text-slate-800"
             }`}>
-              Latest <span className="text-transparent bg-linear-to-r from-purple-600 to-emerald-600 bg-clip-text">Projects</span>
+              Latest <span className="text-transparent bg-gradient-to-r from-violet-500 to-blue-500 bg-clip-text">Projects</span>
             </h2>
             <p className={`text-sm sm:text-base lg:text-lg max-w-2xl mx-auto ${
-              isDark ? "text-purple-200" : "text-slate-600"
+              isDark ? "text-slate-300" : "text-slate-600"
             }`}>
               A collection of my recent work showcasing my skills in web development and design.
             </p>
@@ -129,7 +129,7 @@ export default function Portfolio() {
                 onClick={() => setFilter(category.id)}
                 className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                   filter === category.id
-                    ? "bg-linear-to-r from-purple-600 to-emerald-600 text-white shadow-md"
+                    ? "bg-gradient-to-r from-violet-600 to-blue-600 text-white shadow-md"
                     : isDark
                     ? "bg-slate-800 text-slate-300 hover:bg-slate-700"
                     : "bg-white text-slate-700 hover:bg-slate-50 shadow-sm"
@@ -276,9 +276,9 @@ export default function Portfolio() {
           >
             <motion.a
               href="#contact"
-              className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-linear-to-r from-purple-600 to-emerald-600 text-white font-semibold shadow-lg hover:shadow-purple-500/25 hover:scale-105 transition-all group"
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 text-white font-medium shadow-lg hover:shadow-violet-500/25 hover:-translate-y-1 transition-all group"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
               Start Your Project With Me
               <motion.span
@@ -347,7 +347,7 @@ export default function Portfolio() {
                 <a
                   href={selectedProject.link}
                   target="_blank"
-                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-linear-to-r from-purple-600 to-emerald-600 text-white font-medium hover:opacity-90 transition-opacity"
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 text-white font-medium hover:opacity-90 transition-opacity"
                 >
                   <FaExternalLinkAlt /> Live Demo
                 </a>

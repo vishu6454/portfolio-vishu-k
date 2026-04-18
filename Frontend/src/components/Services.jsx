@@ -57,15 +57,15 @@ export default function Services() {
   return (
     <section id="services" className={`py-12 sm:py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden ${
       isDark 
-        ? "bg-linear-to-br from-slate-900 via-purple-900 to-emerald-900" 
-        : "bg-linear-to-br from-slate-50 via-purple-50 to-emerald-50"
+        ? "bg-[#0f172a]" 
+        : "bg-slate-50"
     }`}>
       {/* Background Pattern */}
-      <div className={`absolute inset-0 ${
-        isDark ? "opacity-10" : "opacity-5"
+      <div className={`absolute inset-0 pointer-events-none ${
+        isDark ? "opacity-15" : "opacity-5"
       }`}>
-        <div className="absolute top-1/4 left-1/4 w-24 h-24 sm:w-32 sm:h-32 bg-purple-500 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-32 h-32 sm:w-48 sm:h-48 bg-emerald-500 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/4 left-1/4 w-32 h-32 sm:w-64 sm:h-64 bg-violet-600 rounded-full blur-[100px]"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-32 h-32 sm:w-64 sm:h-64 bg-blue-600 rounded-full blur-[100px]"></div>
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -76,13 +76,13 @@ export default function Services() {
           transition={{ duration: 0.8 }}
           className="text-center mb-10 sm:mb-12"
         >
-          <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 ${
-            isDark ? "text-white" : "text-slate-800"
+          <h2 className={`text-4xl lg:text-5xl font-bold mb-3 tracking-tight ${
+            isDark ? "text-slate-100" : "text-slate-800"
           }`}>
-            My <span className="text-transparent bg-linear-to-r from-purple-600 to-emerald-600 bg-clip-text">Services</span>
+            My <span className="text-transparent bg-linear-to-r from-violet-500 to-blue-500 bg-clip-text">Services</span>
           </h2>
           <p className={`text-sm sm:text-base lg:text-lg max-w-2xl mx-auto ${
-            isDark ? "text-purple-200" : "text-slate-600"
+            isDark ? "text-slate-300" : "text-slate-600"
           }`}>
             Comprehensive digital solutions designed to elevate your online presence 
             and drive business growth.
@@ -99,12 +99,12 @@ export default function Services() {
               whileHover={{ scale: 1.03, y: -5 }}
               className="group"
             >
-              <div className={`rounded-2xl p-5 sm:p-6 shadow-lg border h-full flex flex-col items-center text-center hover:shadow-xl transition-all backdrop-blur-sm ${
+              <div className={`rounded-2xl p-5 sm:p-6 shadow-sm border h-full flex flex-col items-center text-center hover:shadow-xl transition-all backdrop-blur-sm ${
                 isDark 
-                  ? "bg-slate-800/50 border-slate-700/50 hover:border-emerald-400/30" 
-                  : "bg-white/80 border-slate-200 hover:border-emerald-400/30"
+                  ? "bg-slate-800/40 border-slate-700/50 hover:border-blue-500/30" 
+                  : "bg-white/80 border-slate-200 hover:border-blue-500/30"
               }`}>
-                <div className={`p-3 rounded-xl bg-linear-to-r ${service.linear} mb-4 transition-transform group-hover:scale-110`}>
+                <div className={`p-3 rounded-xl bg-linear-to-r ${service.linear} mb-4 transition-transform group-hover:scale-110 shadow-sm`}>
                   <service.icon className="text-white text-lg sm:text-xl" />
                 </div>
                 
@@ -120,7 +120,7 @@ export default function Services() {
                   {service.description}
                 </p>
                 
-                <div className="w-0 h-0.5 bg-linear-to-r from-purple-600 to-emerald-600 mt-4 group-hover:w-full transition-all duration-300 rounded-full" />
+                <div className="w-0 h-0.5 bg-linear-to-r from-violet-500 to-blue-500 mt-4 group-hover:w-full transition-all duration-300 rounded-full" />
               </div>
             </motion.div>
           ))}
@@ -135,9 +135,9 @@ export default function Services() {
         >
           <motion.a
             href="#contact"
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-linear-to-r from-purple-600 to-emerald-600 text-white font-semibold shadow-lg hover:shadow-purple-500/25 hover:scale-105 transition-all group"
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-linear-to-r from-violet-600 to-blue-600 text-white font-medium shadow-lg hover:shadow-violet-500/25 hover:-translate-y-1 transition-all group"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
             Start Your Project
             <motion.span

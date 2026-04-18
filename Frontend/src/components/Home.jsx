@@ -28,15 +28,15 @@ export default function Home() {
       ref={targetRef}
       className={`min-h-screen flex flex-col lg:flex-row items-center justify-center lg:justify-between px-4 sm:px-6 lg:px-8 py-16 lg:py-0 relative overflow-hidden ${
         isDark 
-          ? "bg-linear-to-br from-slate-900 via-purple-900 to-emerald-900" 
-          : "bg-linear-to-br from-slate-50 via-purple-50 to-emerald-50"
+          ? "bg-[#0f172a]" 
+          : "bg-slate-50"
       }`}
     >
       {/* Animated Background Blobs */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-48 h-48 sm:w-72 sm:h-72 bg-emerald-500 rounded-full blur-3xl opacity-20 animate-blob" />
-        <div className="absolute bottom-20 right-10 w-64 h-64 sm:w-96 sm:h-96 bg-purple-500 rounded-full blur-3xl opacity-20 animate-blob animation-delay-2000" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500 rounded-full blur-3xl opacity-10 animate-blob animation-delay-4000" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-48 h-48 sm:w-72 sm:h-72 bg-violet-600 rounded-full blur-[100px] opacity-20 animate-blob" />
+        <div className="absolute bottom-20 right-10 w-64 h-64 sm:w-96 sm:h-96 bg-blue-600 rounded-full blur-[100px] opacity-20 animate-blob animation-delay-2000" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500 rounded-full blur-[120px] opacity-10 animate-blob animation-delay-4000" />
       </div>
 
       {/* Content */}
@@ -46,7 +46,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className={`text-xl sm:text-2xl font-medium mb-2 ${
-            isDark ? "text-emerald-300" : "text-emerald-600"
+            isDark ? "text-blue-400" : "text-blue-600"
           }`}
         >
           Hello, I'm
@@ -57,12 +57,12 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className={`text-4xl sm:text-5xl lg:text-7xl font-bold mb-3 leading-tight ${
-            isDark ? "text-white" : "text-slate-800"
+            isDark ? "text-slate-100" : "text-slate-800"
           }`}
         >
           Vishu{" "}
-          <span className={`text-transparent bg-linear-to-r ${
-            isDark ? "from-emerald-400 to-purple-400" : "from-emerald-600 to-purple-600"
+          <span className={`text-transparent bg-gradient-to-r ${
+            isDark ? "from-violet-400 to-blue-400" : "from-violet-600 to-blue-600"
           } bg-clip-text`}>
             Kanoujiya
           </span>
@@ -83,8 +83,8 @@ export default function Home() {
             wrapper="span"
             speed={50}
             repeat={Infinity}
-            className={`text-lg sm:text-xl lg:text-2xl font-semibold ${
-              isDark ? "text-purple-200" : "text-purple-700"
+            className={`text-lg sm:text-xl lg:text-2xl font-semibold opacity-90 ${
+              isDark ? "text-slate-300" : "text-slate-700"
             }`}
           />
         </div>
@@ -94,18 +94,18 @@ export default function Home() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
           className={`mt-4 text-base sm:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0 ${
-            isDark ? "text-slate-300" : "text-slate-600"
+            isDark ? "text-slate-400" : "text-slate-600"
           }`}
         >
           Crafting digital experiences that blend{" "}
           <span className={`font-semibold ${
-            isDark ? "text-emerald-300" : "text-emerald-600"
+            isDark ? "text-violet-400" : "text-violet-600"
           }`}>
             beautiful design
           </span>{" "}
           with{" "}
           <span className={`font-semibold ${
-            isDark ? "text-purple-300" : "text-purple-600"
+            isDark ? "text-blue-400" : "text-blue-600"
           }`}>
             cutting-edge technology
           </span>
@@ -113,7 +113,7 @@ export default function Home() {
         </motion.p>
 
         <motion.div 
-          className="flex justify-center lg:justify-start gap-4 my-6"
+          className="flex justify-center lg:justify-start gap-4 my-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
@@ -124,9 +124,9 @@ export default function Home() {
               href={social.href}
               target="_blank"
               rel="noreferrer"
-              className={`p-3 rounded-xl bg-linear-to-br ${social.color} shadow-lg hover:shadow-xl transition-all`}
-              whileHover={{ scale: 1.15, rotate: 5 }}
-              whileTap={{ scale: 0.9 }}
+              className={`p-3 rounded-xl bg-gradient-to-br ${social.color} shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 block`}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
             >
               <social.icon size={20} className="text-white" />
             </motion.a>
@@ -142,9 +142,9 @@ export default function Home() {
           <motion.a
             href="/Vishu_Kanoujiya_Resume.pdf"
             download="Vishu_Kanoujiya_Resume.pdf"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-linear-to-r from-emerald-500 to-green-600 text-white font-semibold shadow-lg hover:shadow-emerald-500/25 transition-all group"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 text-white font-medium shadow-lg hover:shadow-blue-500/25 transition-all group"
             whileHover={{ y: -2, scale: 1.02 }}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.98 }}
           >
             <FaDownload className="text-sm group-hover:animate-bounce" />
             Download Resume
@@ -152,12 +152,12 @@ export default function Home() {
           
           <motion.a
             href="#about"
-            className={`inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border font-semibold transition-all backdrop-blur-sm ${
+            className={`inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border font-medium transition-all backdrop-blur-sm ${
               isDark 
-                ? "border-emerald-400/50 text-emerald-300 hover:bg-emerald-400/10 hover:border-emerald-300" 
-                : "border-emerald-600/50 text-emerald-700 hover:bg-emerald-600/10 hover:border-emerald-600"
+                ? "border-slate-700 text-slate-300 hover:bg-slate-800 hover:border-slate-600 hover:text-white" 
+                : "border-slate-300 text-slate-700 hover:bg-slate-100 hover:border-slate-400"
             }`}
-            whileHover={{ scale: 1.05, y: -2 }}
+            whileHover={{ scale: 1.02, y: -2 }}
           >
             Explore Portfolio
             <FaArrowDown className="text-sm group-hover:translate-y-1 transition-transform" />
@@ -167,28 +167,28 @@ export default function Home() {
 
       {/* Profile Image with Glow Effect */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
+        initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
         animate={{ opacity: 1, scale: 1, rotate: 0 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
-        className="relative mt-10 lg:mt-0"
+        transition={{ duration: 0.8, delay: 0.5, type: "spring" }}
+        className="relative mt-16 lg:mt-0"
       >
         <div className="relative">
           <motion.div
-            className="absolute -inset-1 bg-linear-to-r from-purple-600 to-emerald-600 rounded-2xl blur-lg opacity-75"
+            className="absolute -inset-1.5 bg-gradient-to-r from-violet-600 to-blue-600 rounded-3xl blur-xl opacity-60"
             animate={{ 
               scale: [1, 1.05, 1],
               opacity: [0.5, 0.8, 0.5]
             }}
-            transition={{ duration: 3, repeat: Infinity }}
+            transition={{ duration: 4, repeat: Infinity }}
           />
           
           <motion.img
             src={profileImg}
-            className={`w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-2xl object-cover border-4 shadow-2xl relative z-10 ${
-              isDark ? "border-slate-800/50" : "border-white/50"
+            className={`w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-3xl object-cover border-2 shadow-2xl relative z-10 ${
+              isDark ? "border-slate-700/50" : "border-white/80"
             }`}
             alt="Vishu Kanoujiya"
-            whileHover={{ scale: 1.03 }}
+            whileHover={{ scale: 1.02, rotate: 2 }}
             transition={{ type: "spring", stiffness: 300 }}
             loading="lazy"
           />
@@ -197,16 +197,17 @@ export default function Home() {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 hidden lg:block"
+        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 hidden lg:flex flex-col items-center gap-2"
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
+        <div className={`text-xs font-medium uppercase tracking-widest ${isDark ? "text-slate-500" : "text-slate-400"}`}>Scroll</div>
         <div className={`w-5 h-8 border-2 rounded-full flex justify-center ${
-          isDark ? "border-emerald-400/50" : "border-emerald-600/50"
+          isDark ? "border-slate-600" : "border-slate-400"
         }`}>
           <motion.div
             className={`w-1 h-2 rounded-full mt-2 ${
-              isDark ? "bg-emerald-400" : "bg-emerald-600"
+              isDark ? "bg-blue-400" : "bg-blue-600"
             }`}
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 2, repeat: Infinity }}

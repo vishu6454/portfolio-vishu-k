@@ -28,16 +28,16 @@ export default function Footer() {
       transition={{ duration: 0.8 }}
       className={`py-8 sm:py-10 px-4 sm:px-6 lg:px-8 relative overflow-hidden ${
         isDark 
-          ? "bg-linear-to-r from-slate-900 to-purple-900" 
-          : "bg-linear-to-r from-slate-800 to-purple-800"
+          ? "bg-[#0f172a]" 
+          : "bg-slate-100"
       }`}
     >
       {/* Background Pattern */}
-      <div className={`absolute inset-0 ${
-        isDark ? "opacity-10" : "opacity-5"
+      <div className={`absolute inset-0 pointer-events-none ${
+        isDark ? "opacity-15" : "opacity-5"
       }`}>
-        <div className="absolute top-0 left-0 w-24 h-24 sm:w-32 sm:h-32 bg-emerald-500 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 w-32 h-32 sm:w-48 sm:h-48 bg-purple-500 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 left-0 w-24 h-24 sm:w-32 sm:h-32 bg-blue-600 rounded-full blur-[100px]"></div>
+        <div className="absolute bottom-0 right-0 w-32 h-32 sm:w-48 sm:h-48 bg-violet-600 rounded-full blur-[100px]"></div>
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -49,7 +49,7 @@ export default function Footer() {
             transition={{ delay: 0.2 }}
             className="text-center md:text-left"
           >
-            <h3 className="text-xl sm:text-2xl font-bold bg-linear-to-r from-emerald-400 to-purple-400 bg-clip-text text-transparent mb-1">
+            <h3 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent mb-1">
               Vishu Kanoujiya
             </h3>
             <p className="text-slate-300 text-sm">Frontend Developer & Web Designer</p>
@@ -89,7 +89,7 @@ export default function Footer() {
                 <motion.a
                   key={item}
                   href={`#${item.toLowerCase()}`}
-                  className="text-slate-300 hover:text-emerald-300 transition-colors font-medium text-xs sm:text-sm text-center"
+                  className={`transition-colors font-medium text-xs sm:text-sm text-center ${isDark ? "text-slate-300 hover:text-blue-400" : "text-slate-600 hover:text-blue-600"}`}
                   whileHover={{ scale: 1.1, y: -2 }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}

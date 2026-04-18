@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 /* Custom theme configuration */
@@ -29,17 +30,17 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #8b5cf6, #10b981);
+  background: linear-gradient(to bottom, #8b5cf6, #3b82f6);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #7c3aed, #059669);
+  background: linear-gradient(to bottom, #7c3aed, #2563eb);
 }
 
 /* Selection color */
 ::selection {
-  background-color: rgba(139, 92, 246, 0.3);
+  background-color: rgba(59, 130, 246, 0.3);
   color: inherit;
 }
 
